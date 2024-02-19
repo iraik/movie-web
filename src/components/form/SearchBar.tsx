@@ -41,8 +41,16 @@ export const SearchBarInput = forwardRef<HTMLInputElement, SearchBarProps>(
           })}
         />
         <Flare.Child className="flex flex-1 flex-col">
-          <div className="pointer-events-none absolute bottom-0 left-5 top-0 flex max-h-14 items-center text-search-icon">
-            <Icon icon={Icons.SEARCH} />
+          <div
+            onClick={() => {
+              if (ref && typeof ref !== "function") {
+                const val = ref.current?.value;
+                setSearch(val || "");
+              }
+            }}
+            className="cursor-pointer rounded-s-[28px] absolute bottom-0 z-10 top-0 flex items-center text-search-icon w-12"
+          >
+            <Icon className="relative left-5" icon={Icons.SEARCH} />
           </div>
 
           <TextInputControl
